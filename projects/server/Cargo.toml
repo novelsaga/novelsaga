@@ -1,0 +1,21 @@
+[package]
+name = "novelflow-server"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "novelflow_server"
+path = "src/main.rs"
+
+[dependencies]
+tower-lsp = "0.20"
+tokio = { version = "1", features = ["io-std", "io-util", "macros", "rt", "sync"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio-util = { version = "0.7", features = ["compat"] }
+
+[profile.release]
+opt-level = "z"     # Optimize for size
+lto = true          # Enable Link Time Optimization
+codegen-units = 1   # Reduce parallel code generation units to improve optimization
+strip = true        # Strip symbols from binary

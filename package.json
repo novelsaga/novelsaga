@@ -1,0 +1,57 @@
+{
+  "name": "novelflow",
+  "displayName": "NovelFlow Language Server",
+  "description": "Language Server for NovelFlow with WASI support",
+  "version": "0.1.0",
+  "publisher": "novelflow",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:plaintext",
+    "onLanguage:markdown"
+  ],
+  "main": "./projects/client/out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "NovelFlow",
+      "properties": {
+        "novelflow.trace.server": {
+          "scope": "window",
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the language server."
+        }
+      }
+    }
+  },
+
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "pnpm --filter client compile && pnpm run build:server",
+    "build:server": "cargo build --release",
+    "watch": "pnpm --filter client watch",
+    "lint": "pnpm --filter client lint",
+    "test": "pnpm --filter client test",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  }
+}

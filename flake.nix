@@ -84,6 +84,8 @@
                   "aarch64-unknown-linux-gnu"
                   "x86_64-pc-windows-msvc"
                   "x86_64-unknown-linux-gnu"
+                  "wasm32-unknown-unknown"
+                  "wasm32-wasip1"
                 ];
               };
             };

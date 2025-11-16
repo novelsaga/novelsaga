@@ -1,0 +1,6 @@
+// Test file for NovelFlow LSP
+
+
+
+// Try typing 'hel' or 'wor' to see completions
+
