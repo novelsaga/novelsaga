@@ -15,7 +15,7 @@ impl Backend {
 #[tower_lsp::async_trait]
 impl LanguageServer for Backend {
     async fn initialize(&self, params: InitializeParams) -> Result<InitializeResult> {
-        eprintln!("NovelFlow LSP Server initializing...");
+        eprintln!("NovelSaga LSP Server initializing...");
 
         // Log workspace information
         if let Some(root_uri) = params.root_uri {
@@ -36,22 +36,22 @@ impl LanguageServer for Backend {
                 ..Default::default()
             },
             server_info: Some(ServerInfo {
-                name: "NovelFlow Language Server".to_string(),
+                name: "NovelSaga Language Server".to_string(),
                 version: Some("0.1.0".to_string()),
             }),
         })
     }
 
     async fn initialized(&self, _: InitializedParams) {
-        eprintln!("NovelFlow LSP Server initialized!");
+        eprintln!("NovelSaga LSP Server initialized!");
 
         self.client
-            .log_message(MessageType::INFO, "NovelFlow server initialized")
+            .log_message(MessageType::INFO, "NovelSaga server initialized")
             .await;
     }
 
     async fn shutdown(&self) -> Result<()> {
-        eprintln!("NovelFlow LSP Server shutting down...");
+        eprintln!("NovelSaga LSP Server shutting down...");
         Ok(())
     }
 
@@ -101,7 +101,7 @@ impl LanguageServer for Backend {
 
         Ok(Some(Hover {
             contents: HoverContents::Scalar(MarkedString::String(
-                "NovelFlow Language Server - Hover information".to_string(),
+                "NovelSaga Language Server - Hover information".to_string(),
             )),
             range: None,
         }))

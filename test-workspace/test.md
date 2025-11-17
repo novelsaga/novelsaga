@@ -1,6 +1,6 @@
-# NovelFlow Test Document
+# NovelSaga Test Document
 
-This is a markdown file for testing NovelFlow LSP.
+This is a markdown file for testing NovelSaga LSP.
 
 Try typing:
 - hel (should show "hello" completion)

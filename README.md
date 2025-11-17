@@ -1,11 +1,11 @@
-# NovelFlow Language Server
+# NovelSaga Language Server
 
 A multi-workspace Language Server Protocol implementation using Tower-LSP compiled to WebAssembly with WASI support.
 
 ## Architecture
 
 ```
-novelflow/
+novelsaga/
 ├── projects/
 │   ├── client/          # TypeScript VSCode client
 │   │   └── src/
@@ -61,7 +61,7 @@ pnpm run build:server
 2. Press `F5` to start debugging
 3. A new VSCode window will open with the extension loaded
 4. Create a test file with `.nf` extension
-5. Check the Output panel for "NovelFlow LSP" logs
+5. Check the Output panel for "NovelSaga LSP" logs
 
 ## Project Structure
 
@@ -100,7 +100,7 @@ Configure in VSCode settings:
 
 ```json
 {
-  "novelflow.trace.server": "verbose"  // Enable detailed logging
+  "novelsaga.trace.server": "verbose"  // Enable detailed logging
 }
 ```
 
@@ -153,13 +153,13 @@ The server compiles to `wasm32-wasip1` and uses:
 ### Server not starting
 
 Check:
-1. WASM file exists: `projects/server/target/wasm32-wasip1/release/novelflow_server.wasm`
+1. WASM file exists: `projects/server/target/wasm32-wasip1/release/novelsaga_server.wasm`
 2. Build completed: `pnpm run build:server`
 3. WASI extension installed: `ms-vscode.wasm-wasi-core`
 
 ### No completions appearing
 
-- Check Output panel for "NovelFlow LSP" logs
+- Check Output panel for "NovelSaga LSP" logs
 - Verify `.nf` file is in workspace
 - Enable verbose tracing in settings
 

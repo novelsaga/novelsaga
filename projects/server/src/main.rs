@@ -1,8 +1,8 @@
-use novelflow_server::*;
+use novelsaga_server::*;
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
-    eprintln!("NovelFlow LSP Server starting...");
+    eprintln!("NovelSaga LSP Server starting...");
 
     // Get stdin/stdout for LSP communication
     let stdin = tokio::io::stdin();

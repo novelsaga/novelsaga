@@ -1,5 +1,5 @@
 {
-  description = "workspace flake for NovelFlow project";
+  description = "workspace flake for NovelSaga project";
 
   inputs = {
     devenv-root = {
@@ -54,7 +54,7 @@
         }:
         {
           devenv.shells.default = {
-            name = "novelflow";
+            name = "novelsaga";
             env = {
               COREPACK_INTEGRITY_KEYS = "0";
             };

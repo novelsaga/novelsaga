@@ -14,7 +14,7 @@ interface ServerInstance {
 let serverInstances: Map<string, ServerInstance> = new Map();
 
 export async function activate(context: vscode.ExtensionContext) {
-    console.log('NovelFlow extension activating...');
+    console.log('NovelSaga extension activating...');
 
     // Start servers for existing workspace folders
     if (vscode.workspace.workspaceFolders) {
@@ -38,7 +38,7 @@ export async function activate(context: vscode.ExtensionContext) {
         })
     );
 
-    console.log('NovelFlow extension activated');
+    console.log('NovelSaga extension activated');
 }
 
 async function startServerForFolder(
@@ -58,7 +58,7 @@ async function startServerForFolder(
         // Path to the native server binary
         const serverBinaryPath = path.join(
             context.extensionPath,
-            'target/release/novelflow_server'
+            'target/release/novelsaga_server'
         );
 
         // Run the native server directly
@@ -90,13 +90,13 @@ async function startServerForFolder(
                 },
             ],
             workspaceFolder: folder,
-            outputChannelName: `NovelFlow LSP (${folder.name})`,
+            outputChannelName: `NovelSaga LSP (${folder.name})`,
         };
 
         // Create and start the language client
         const client = new LanguageClient(
-            'novelflow',
-            `NovelFlow Language Server (${folder.name})`,
+            'novelsaga',
+            `NovelSaga Language Server (${folder.name})`,
             run,
             clientOptions
         );
@@ -108,7 +108,7 @@ async function startServerForFolder(
     } catch (error) {
         console.error(`Failed to start server for ${folder.name}:`, error);
         void vscode.window.showErrorMessage(
-            `Failed to start NovelFlow server for ${folder.name}: ${error}`
+            `Failed to start NovelSaga server for ${folder.name}: ${error}`
         );
     }
 }
@@ -127,7 +127,7 @@ async function stopServerForFolder(
 }
 
 export async function deactivate(): Promise<void> {
-    console.log('NovelFlow extension deactivating...');
+    console.log('NovelSaga extension deactivating...');
 
     // Stop all server instances
     const stopPromises: Promise<void>[] = [];
@@ -138,5 +138,5 @@ export async function deactivate(): Promise<void> {
     await Promise.all(stopPromises);
     serverInstances.clear();
 
-    console.log('NovelFlow extension deactivated');
+    console.log('NovelSaga extension deactivated');
 }

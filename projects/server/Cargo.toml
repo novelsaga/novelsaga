@@ -1,10 +1,10 @@
 [package]
-name = "novelflow-server"
+name = "novelsaga-server"
 version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "novelflow_server"
+name = "novelsaga_server"
 path = "src/main.rs"
 
 [dependencies]

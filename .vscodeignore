@@ -5,7 +5,7 @@ projects/**/tsconfig.json
 projects/**/build.mjs
 projects/server/Cargo.toml
 projects/server/target/**
-!target/release/novelflow_server
+!target/release/novelsaga_server
 **/.eslintrc.json
 **/*.map
 **/*.ts

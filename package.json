@@ -1,9 +1,9 @@
 {
-  "name": "novelflow",
-  "displayName": "NovelFlow Language Server",
-  "description": "Language Server for NovelFlow with WASI support",
+  "name": "novelsaga",
+  "displayName": "NovelSaga Language Server",
+  "description": "Language Server for NovelSaga with WASI support",
   "version": "0.1.0",
-  "publisher": "novelflow",
+  "publisher": "novelsaga",
   "license": "MIT",
   "private": true,
   "engines": {
@@ -20,9 +20,9 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "NovelFlow",
+      "title": "NovelSaga",
       "properties": {
-        "novelflow.trace.server": {
+        "novelsaga.trace.server": {
           "scope": "window",
           "type": "string",
           "enum": [
