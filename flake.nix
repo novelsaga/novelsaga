@@ -21,6 +21,7 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-nodejs.url = "github:NixOS/nixpkgs/e1ebeec86b771e9d387dd02d82ffdc77ac753abc"; # 22.20.0
   };
 
   nixConfig = {
@@ -29,9 +30,15 @@
   };
 
   outputs =
-    inputs@{ flake-parts, devenv-root, ... }:
+    inputs@{
+      flake-parts,
+      devenv-root,
+      nixpkgs-nodejs,
+      ...
+    }:
     let
       inherit (inputs.nixpkgs) lib;
+
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
@@ -52,15 +59,24 @@
           system,
           ...
         }:
+        let
+          pkgs-for-nodejs = import nixpkgs-nodejs {
+            inherit system;
+          };
+        in
         {
           devenv.shells.default = {
             name = "novelsaga";
             env = {
               COREPACK_INTEGRITY_KEYS = "0";
             };
+            packages = with pkgs; [
+              pkgsCross.aarch64-multiplatform.stdenv.cc
+            ];
             languages = {
               javascript = {
                 enable = true;
+                package = pkgs-for-nodejs.nodejs-slim;
                 corepack.enable = true;
               };
               nix = {
@@ -80,9 +96,8 @@
                 ];
                 targets = [
                   "aarch64-apple-darwin"
-                  "aarch64-pc-windows-msvc"
+                  "x86_64-apple-darwin"
                   "aarch64-unknown-linux-gnu"
-                  "x86_64-pc-windows-msvc"
                   "x86_64-unknown-linux-gnu"
                   "wasm32-unknown-unknown"
                   "wasm32-wasip1"

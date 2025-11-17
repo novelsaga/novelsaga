@@ -1,0 +1,50 @@
+[build]
+# 默认使用当前平台
+target-dir = "target"
+
+# Linux 目标配置
+[target.x86_64-unknown-linux-gnu]
+linker = "cc"
+
+[target.aarch64-unknown-linux-gnu]
+linker = "aarch64-unknown-linux-gnu-gcc"
+
+[target.x86_64-pc-windows-gnu]
+# @todo
+
+[target.aarch64-pc-windows-gnullvm]
+# @todo
+
+# macOS 目标配置
+[target.x86_64-apple-darwin]
+# @todo
+
+[target.aarch64-apple-darwin]
+# @todo
+
+# WASM 目标配置
+[target.wasm32-unknown-unknown]
+# 不需要 linker,使用 rust-lld
+
+[target.wasm32-wasip1]
+# 不需要 linker,使用 rust-lld
+
+# 优化设置
+[profile.release]
+opt-level = "z"       # 优化文件大小
+lto = "fat"           # 完整 LTO
+codegen-units = 1     # 单个代码生成单元
+strip = true          # 剥离符号
+panic = "abort"       # 减少二进制大小
+
+[profile.dev]
+opt-level = 0
+debug = true
+
+# Cargo 行为配置
+[term]
+verbose = false
+color = "auto"
+
+[net]
+git-fetch-with-cli = true
