@@ -10,8 +10,7 @@
         "--disable-extensions",
         "${workspaceFolder}/test-workspace"
       ],
-      "outFiles": ["${workspaceFolder}/projects/client/out/**/*.js"],
-      "preLaunchTask": "compile"
+      "outFiles": ["${workspaceFolder}/projects/client/out/**/*.js"]
     },
     {
       "name": "Debug Extension",
@@ -24,7 +23,6 @@
         "${workspaceFolder}/test-workspace"
       ],
       "outFiles": ["${workspaceFolder}/projects/client/out/**/*.js"],
-      "preLaunchTask": "compile",
       "sourceMaps": true
     }
   ]

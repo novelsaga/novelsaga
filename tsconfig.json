@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "Node16",
+    "module": "nodenext",
     "target": "ES2022",
     "lib": ["ES2022"],
     "outDir": "out",
@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node16"
+    "moduleResolution": "nodenext"
   },
   "exclude": ["node_modules", ".vscode-test"]
 }

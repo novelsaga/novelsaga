@@ -1,3 +1,0 @@
-{
-  "rust-analyzer.server.path": ".devenv/profile/bin/rust-analyzer",
-}

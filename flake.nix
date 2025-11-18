@@ -29,82 +29,86 @@
     extra-substituters = "https://devenv.cachix.org";
   };
 
-  outputs =
-    inputs@{
-      flake-parts,
-      devenv-root,
-      nixpkgs-nodejs,
-      ...
-    }:
-    let
-      inherit (inputs.nixpkgs) lib;
-
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs @ {
+    flake-parts,
+    devenv-root,
+    ...
+  }: let
+    inherit (inputs.nixpkgs) lib;
+    devenv-root-path = builtins.readFile devenv-root;
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.devenv.flakeModule
       ];
-      systems =
-        with lib;
+      systems = with lib;
         subtractLists platforms.freebsd (
           subtractLists platforms.power (subtractLists platforms.riscv systems.flakeExposed)
         );
-
-      perSystem =
-        {
-          config,
-          self',
-          inputs',
-          pkgs,
-          system,
-          ...
-        }:
-        let
-          pkgs-for-nodejs = import nixpkgs-nodejs {
-            inherit system;
+      perSystem = {
+        config,
+        self',
+        inputs',
+        system,
+        pkgs,
+        ...
+      }: let
+        pkgs-for-nodejs = import inputs.nixpkgs-nodejs {
+          inherit system;
+        };
+      in {
+        devenv.shells.default = {
+          name = "novelsaga";
+          env = {
+            COREPACK_INTEGRITY_KEYS = "0";
           };
-        in
-        {
-          devenv.shells.default = {
-            name = "novelsaga";
-            env = {
-              COREPACK_INTEGRITY_KEYS = "0";
+          files = {
+            ".vscode/settings.json".json = import ./.vscode/settings.nix {
+              inherit
+                devenv-root-path
+                pkgs
+                pkgs-for-nodejs
+                lib
+                ;
             };
-            packages = with pkgs; [
-              pkgsCross.aarch64-multiplatform.stdenv.cc
-            ];
-            languages = {
-              javascript = {
-                enable = true;
-                package = pkgs-for-nodejs.nodejs-slim;
-                corepack.enable = true;
-              };
-              nix = {
-                enable = true;
-                lsp.package = pkgs.nil;
-              };
-              rust = {
-                enable = true;
-                channel = "nightly";
-                components = [
-                  "rustc"
-                  "cargo"
-                  "clippy"
-                  "rustfmt"
-                  "rust-analyzer"
-                  "miri"
-                ];
-                targets = [
-                  "aarch64-apple-darwin"
-                  "x86_64-apple-darwin"
-                  "aarch64-unknown-linux-gnu"
-                  "x86_64-unknown-linux-gnu"
-                  "wasm32-unknown-unknown"
-                  "wasm32-wasip1"
-                ];
-              };
+          };
+          packages = with pkgs; [
+            cargo-zigbuild
+          ];
+          languages = {
+            javascript = {
+              enable = true;
+              package = pkgs-for-nodejs.nodejs-slim;
+              corepack.enable = true;
+            };
+            nix = {
+              enable = true;
+              lsp.package = pkgs.nil;
+            };
+            rust = {
+              enable = true;
+              channel = "nightly";
+              components = [
+                "rustc"
+                "cargo"
+                "clippy"
+                "rustfmt"
+                "rust-analyzer"
+                "miri"
+              ];
+              targets = [
+                "aarch64-apple-darwin"
+                "x86_64-apple-darwin"
+                "aarch64-pc-windows-gnullvm"
+                "x86_64-pc-windows-gnu"
+                "aarch64-unknown-linux-gnu"
+                "x86_64-unknown-linux-gnu"
+                "wasm32-unknown-unknown"
+                "wasm32-wasip1"
+              ];
             };
           };
         };
+      };
     };
 }

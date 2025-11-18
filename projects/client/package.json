@@ -12,8 +12,5 @@
   },
   "dependencies": {
     "vscode-languageclient": "^9.0.1"
-  },
-  "devDependencies": {
-    "esbuild": "^0.27.0"
   }
 }
