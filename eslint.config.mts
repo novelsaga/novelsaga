@@ -1,5 +1,3 @@
-import type { ConfigArray } from 'typescript-eslint'
-
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 

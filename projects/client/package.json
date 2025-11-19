@@ -1,14 +1,13 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "private": true,
   "description": "NovelSaga LSP Client",
   "main": "./out/extension.js",
   "scripts": {
-    "compile": "node build.mjs",
-    "watch": "node build.mjs --watch",
+    "compile": "node build.mts",
     "lint": "eslint src --ext ts",
-    "test": "echo \"No tests yet\""
+    "test": "echo \"No tests yet\"",
+    "watch": "node build.mts --watch"
   },
   "dependencies": {
     "vscode-languageclient": "^9.0.1"

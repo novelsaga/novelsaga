@@ -8,7 +8,7 @@
   nodePath = lib.getExe pkgs-for-nodejs.nodejs-slim;
 in {
   "rust-analyzer.server.path" = "${devenv-root-path}/.devenv/profile/bin/rust-analyzer";
-  "prettier.enable" = false;
+  "prettier.enable" = true;
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = lib.getExe pkgs.nil;
   "nix.formatterPath" = "alejandra";
@@ -31,15 +31,15 @@ in {
   "eslint.nodePath" = "${devenv-root-path}/node_modules";
   "typescript.tsserver.nodePath" = nodePath;
   "[javascript]" = {
-		"editor.defaultFormatter" = "dbaeumer.vscode-eslint";
-	};
-	"[javascriptreact]" = {
-		"editor.defaultFormatter" = "dbaeumer.vscode-eslint";
-	};
-	"[typescript]" = {
-		"editor.defaultFormatter" = "dbaeumer.vscode-eslint";
-	};
-	"[typescriptreact]" = {
-		"editor.defaultFormatter" = "dbaeumer.vscode-eslint";
-	};
+    "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
+  };
+  "[javascriptreact]" = {
+    "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
+  };
+  "[typescript]" = {
+    "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
+  };
+  "[typescriptreact]" = {
+    "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
+  };
 }

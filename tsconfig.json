@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
-    "module": "nodenext",
-    "target": "ES2022",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": ["ES2022"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "outDir": "out",
     "rootDir": ".",
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "nodenext"
+    "target": "ES2022"
   },
-  "exclude": ["node_modules", ".vscode-test"]
+  "exclude": ["node_modules", ".vscode-test"],
+  "include": ["**/**.mts", "**/*.cts", "**/*.ts", ".*.ts"]
 }

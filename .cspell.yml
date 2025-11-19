@@ -25,6 +25,7 @@ ignorePaths:
   - .cache
   - patches
   - tsconfig.json
+  - '**/*.nix'
 words:
   - cachix
   - corepack

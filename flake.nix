@@ -21,7 +21,7 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs-nodejs.url = "github:NixOS/nixpkgs/e1ebeec86b771e9d387dd02d82ffdc77ac753abc"; # 22.20.0
+    nixpkgs-nodejs.url = "github:NixOS/nixpkgs/85a6c4a07faa12aaccd81b36ba9bfc2bec974fa1"; # 24.11.1
   };
 
   nixConfig = {
@@ -61,6 +61,7 @@
           name = "novelsaga";
           env = {
             COREPACK_INTEGRITY_KEYS = "0";
+            NODE_OPTIONS = "--experimental-strip-types";
           };
           files = {
             ".vscode/settings.json".json = import ./.vscode/settings.nix {
@@ -74,6 +75,7 @@
           };
           packages = with pkgs; [
             cargo-zigbuild
+            shfmt
           ];
           languages = {
             javascript = {

@@ -8,22 +8,25 @@
   ],
   "publisher": "novelsaga",
   "license": "MIT",
-  "private": true,
   "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
   "engines": {
     "pnpm": ">=10.0.0",
     "vscode": "^1.106.0"
   },
-  "main": "./projects/client/out/extension.js",
+  "main": "./projects/client/out/extension.cjs",
   "scripts": {
     "build:server": "cargo zigbuild --release",
     "compile": "pnpm --filter client compile && pnpm run build:server",
     "lint": "pnpm --filter client lint",
     "package": "vsce package --no-dependencies",
-    "postinstall": "husky",
+    "prepare": "husky",
     "test": "pnpm --filter client test",
     "vscode:prepublish": "pnpm run compile",
     "watch": "pnpm --filter client watch"
+  },
+  "dependencies": {
+    "ramda": "^0.32.0",
+    "ramda-adjunct": "^5.1.0"
   },
   "devDependencies": {
     "@cspell/cspell-types": "^9.3.2",
@@ -42,7 +45,7 @@
     "@prettier/plugin-oxc": "^0.0.5",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/micromatch": "^4.0.10",
-    "@types/node": "^22.19.1",
+    "@types/node": "^24.10.1",
     "@types/ramda": "^0.31.1",
     "@types/regexgen": "^1.3.3",
     "@types/shebang-command": "^1.2.2",
@@ -99,9 +102,5 @@
         }
       }
     }
-  },
-  "dependencies": {
-    "ramda": "^0.32.0",
-    "ramda-adjunct": "^5.1.0"
   }
 }

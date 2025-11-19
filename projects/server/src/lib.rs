@@ -75,7 +75,10 @@ impl LanguageServer for Backend {
     }
 
     async fn completion(&self, params: CompletionParams) -> Result<Option<CompletionResponse>> {
-        eprintln!("Completion requested at {:?}", params.text_document_position);
+        eprintln!(
+            "Completion requested at {:?}",
+            params.text_document_position
+        );
 
         // Simple example completions
         let completions = vec![
@@ -97,7 +100,10 @@ impl LanguageServer for Backend {
     }
 
     async fn hover(&self, params: HoverParams) -> Result<Option<Hover>> {
-        eprintln!("Hover requested at {:?}", params.text_document_position_params);
+        eprintln!(
+            "Hover requested at {:?}",
+            params.text_document_position_params
+        );
 
         Ok(Some(Hover {
             contents: HoverContents::Scalar(MarkedString::String(
@@ -107,4 +113,3 @@ impl LanguageServer for Backend {
         }))
     }
 }
-
