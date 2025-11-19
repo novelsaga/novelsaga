@@ -8,6 +8,6 @@ Try typing:
 
 Hover over any text to see hover information.
 
-hello
+hello你还
 
 world

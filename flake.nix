@@ -73,14 +73,20 @@
                 ;
             };
           };
-          packages = with pkgs; [
-            cargo-zigbuild
-            shfmt
-          ];
+          packages =
+            (with pkgs; [
+              shfmt
+              cargo-zigbuild
+            ])
+            ++ (with pkgs.pkgsCross; [
+              mingwW64.stdenv.cc
+              ucrtAarch64.stdenv.cc
+              aarch64-multiplatform.stdenv.cc
+            ]);
           languages = {
             javascript = {
               enable = true;
-              package = pkgs-for-nodejs.nodejs-slim;
+              package = pkgs-for-nodejs.nodejs-slim_24;
               corepack.enable = true;
             };
             nix = {

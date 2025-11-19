@@ -50,12 +50,17 @@ async function startServerForFolder(context: vscode.ExtensionContext, folder: vs
 
   try {
     // Path to the native server binary
-    const serverBinaryPath = path.join(context.extensionPath, 'target/release/novelsaga_server')
+    const serverBinaryPath = path.join(
+      context.extensionPath,
+      'target',
+      process.env.NODE_ENV === 'development' ? 'debug' : 'release',
+      'novelsaga_server',
+    )
 
     // Run the native server directly
     const run: Executable = {
       command: serverBinaryPath,
-      args: [],
+      args: ['--lsp'],
       options: {
         cwd: folder.uri.fsPath,
         env: {

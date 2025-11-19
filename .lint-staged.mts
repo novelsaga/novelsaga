@@ -5,7 +5,7 @@ import path from 'node:path'
 
 import isBinaryPath from 'is-binary-path'
 import micromatch from 'micromatch'
-import { isEmpty, isNotEmpty } from 'ramda'
+import { isEmpty } from 'ramda'
 import shebangCommand from 'shebang-command'
 
 const isShellScript = async (filename: string) => {
@@ -33,15 +33,6 @@ const commands = {
 
 const lintStage: Configuration = async (allStagedFiles) => {
   const noBinaryFile = allStagedFiles.filter((f) => !isBinaryPath(f))
-  const srcJsFiles = micromatch(noBinaryFile, [
-    '**/src/**/*.js',
-    '**/src/**/*.mjs',
-    '**/src/**/*.cjs',
-    '**/src/**/*.jsx',
-  ])
-  if (isNotEmpty(srcJsFiles)) {
-    throw new Error(`JavaScript files aren't allowed in src directory`)
-  }
   const jsAndTsFiles = micromatch(noBinaryFile, [
     '**/*.js',
     '**/*.mjs',
@@ -65,14 +56,14 @@ const lintStage: Configuration = async (allStagedFiles) => {
   const ignoreFiles = noBinaryFile.filter((f) => f.endsWith('ignore'))
   const nixFiles = noBinaryFile.filter((f) => f.endsWith('.nix'))
   const rustFiles = noBinaryFile.filter((f) => f.endsWith('.rs'))
-  return commands
-    .checkEmpty(noBinaryFile, commands.changeEol)
-    .concat(commands.checkEmpty(noBinaryFile, commands.cspell))
-    .concat(commands.checkEmpty(jsAndTsFiles, commands.eslint))
-    .concat(commands.checkEmpty([...jsonFile, ...yamlFile], commands.prettier))
-    .concat(commands.checkEmpty([...shellFiles, ...ignoreFiles], commands.shfmt))
-    .concat(commands.checkEmpty(nixFiles, commands.alejandra))
-    .concat(commands.checkEmpty(rustFiles, commands.rustfmt))
+  return ([] as string[])
+    .concat(...commands.checkEmpty(noBinaryFile, commands.changeEol))
+    .concat(...commands.checkEmpty(noBinaryFile, commands.cspell))
+    .concat(...commands.checkEmpty(jsAndTsFiles, commands.eslint))
+    .concat(...commands.checkEmpty([...jsonFile, ...yamlFile], commands.prettier))
+    .concat(...commands.checkEmpty([...shellFiles, ...ignoreFiles], commands.shfmt))
+    .concat(...commands.checkEmpty(nixFiles, commands.alejandra))
+    .concat(...commands.checkEmpty(rustFiles, commands.rustfmt))
 }
 
 export default lintStage

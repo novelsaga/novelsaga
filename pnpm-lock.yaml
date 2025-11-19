@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      micromatch:
+        specifier: ^4.0.8
+        version: 4.0.8
       ramda:
         specifier: ^0.32.0
         version: 0.32.0
@@ -39,6 +42,9 @@ importers:
       '@cspell/dict-npm':
         specifier: ^5.2.22
         version: 5.2.22
+      '@cspell/dict-rust':
+        specifier: ^4.0.12
+        version: 4.0.12
       '@cspell/dict-typescript':
         specifier: ^3.2.3
         version: 3.2.3

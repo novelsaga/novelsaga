@@ -5,9 +5,10 @@
   pkgs-for-nodejs,
   ...
 }: let
-  nodePath = lib.getExe pkgs-for-nodejs.nodejs-slim;
+  nodePath = lib.getExe pkgs-for-nodejs.nodejs-slim_24;
+  devenvRootPathBin = "${devenv-root-path}/.devenv/profile/bin";
 in {
-  "rust-analyzer.server.path" = "${devenv-root-path}/.devenv/profile/bin/rust-analyzer";
+  "rust-analyzer.server.path" = "${devenvRootPathBin}/rust-analyzer";
   "prettier.enable" = true;
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = lib.getExe pkgs.nil;

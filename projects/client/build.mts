@@ -1,8 +1,10 @@
 import * as esbuild from 'esbuild'
+import macros from 'unplugin-parcel-macros'
 
 const isWatch = process.argv.includes('--watch')
 
 const ctx = await esbuild.context({
+  plugins: [macros.esbuild()],
   entryPoints: ['./src/extension.ts'],
   bundle: true,
   outfile: './out/extension.cjs',
@@ -13,6 +15,7 @@ const ctx = await esbuild.context({
   sourcemap: true,
   minify: !isWatch,
   logLevel: 'info',
+  treeShaking: true,
 })
 
 if (isWatch) {

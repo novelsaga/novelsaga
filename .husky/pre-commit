@@ -3,3 +3,4 @@ if [ -t 2 ]; then
 fi
 
 pnpm exec lint-staged --config .lint-staged.mts
+cargo clippy --all-targets --all-features -- -D warnings

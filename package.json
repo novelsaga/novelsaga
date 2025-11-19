@@ -10,21 +10,21 @@
   "license": "MIT",
   "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
   "engines": {
+    "node": ">=24",
     "pnpm": ">=10.0.0",
     "vscode": "^1.106.0"
   },
   "main": "./projects/client/out/extension.cjs",
   "scripts": {
-    "build:server": "cargo zigbuild --release",
-    "compile": "pnpm --filter client compile && pnpm run build:server",
+    "build:server": "cargo build",
+    "compile": "pnpm --filter client compile:debug && pnpm run build:server",
     "lint": "pnpm --filter client lint",
-    "package": "vsce package --no-dependencies",
     "prepare": "husky",
     "test": "pnpm --filter client test",
-    "vscode:prepublish": "pnpm run compile",
     "watch": "pnpm --filter client watch"
   },
   "dependencies": {
+    "micromatch": "^4.0.8",
     "ramda": "^0.32.0",
     "ramda-adjunct": "^5.1.0"
   },
@@ -37,6 +37,7 @@
     "@cspell/dict-html": "^4.0.12",
     "@cspell/dict-node": "^5.0.8",
     "@cspell/dict-npm": "^5.2.22",
+    "@cspell/dict-rust": "^4.0.12",
     "@cspell/dict-typescript": "^3.2.3",
     "@cspell/eslint-plugin": "^9.3.2",
     "@eslint/eslintrc": "^3.3.1",
@@ -81,8 +82,18 @@
     "yaml": "^2.8.1"
   },
   "activationEvents": [
-    "onLanguage:plaintext",
-    "onLanguage:markdown"
+    "workspaceContains:novelsaga.config.toml",
+    "workspaceContains:novelsaga.config.yaml",
+    "workspaceContains:novelsaga.config.json",
+    "workspaceContains:novelsaga.config.json5",
+    "workspaceContains:novelsaga.config.ron",
+    "workspaceContains:novelsaga.config.corn",
+    "workspaceContains:.novelsaga.toml",
+    "workspaceContains:.novelsaga.yaml",
+    "workspaceContains:.novelsaga.json",
+    "workspaceContains:.novelsaga.json5",
+    "workspaceContains:.novelsaga.ron",
+    "workspaceContains:.novelsaga.corn"
   ],
   "contributes": {
     "configuration": {

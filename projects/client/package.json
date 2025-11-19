@@ -4,7 +4,8 @@
   "description": "NovelSaga LSP Client",
   "main": "./out/extension.js",
   "scripts": {
-    "compile": "node build.mts",
+    "compile:debug": "cross-env NODE_ENV=development node build.mts",
+    "compile:release": "node build.mts",
     "lint": "eslint src --ext ts",
     "test": "echo \"No tests yet\"",
     "watch": "node build.mts --watch"

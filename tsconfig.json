@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["ES2022"],
@@ -12,6 +13,21 @@
     "strict": true,
     "target": "ES2022"
   },
-  "exclude": ["node_modules", ".vscode-test"],
-  "include": ["**/**.mts", "**/*.cts", "**/*.ts", ".*.ts"]
+  "exclude": ["node_modules", ".vscode-test", "out"],
+  "include": [
+    "**/*.ts",
+    "**/*.mts",
+    "**/*.cts",
+    "**/*.ts",
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/.*.ts",
+    "**/.*.mts",
+    "**/.*.cts",
+    "**/.*.ts",
+    "**/.*.js",
+    "**/.*.cjs",
+    "**/.*.mjs"
+  ]
 }

@@ -12,9 +12,11 @@ import YAML from 'yaml'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const pnpmLock = YAML.parse(fs.readFileSync(path.join(__dirname, 'pnpm-lock.yaml'), 'utf8'))
 
-const typescriptVer: string = pnpmLock.importers['.'].devDependencies.typescript.version
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+const typescriptVer = pnpmLock.importers['.'].devDependencies.typescript.version as string
 
 const jsCommon: PrettierPluginSortImportsConfig & PrettierPluginJsdocOptions = {
   singleQuote: true,
