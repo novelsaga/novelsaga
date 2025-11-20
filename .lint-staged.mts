@@ -27,8 +27,7 @@ const commands = {
   checkEmpty: (filenames: string[], command: (filenames: string[]) => string) =>
     isEmpty(filenames) ? [] : [command(filenames)],
   alejandra: (filenames: string[]) => `alejandra ${filenames.map((f) => path.relative(process.cwd(), f)).join(' ')}`,
-  rustfmt: (filenames: string[]) =>
-    `rustfmt --edition 2024 ${filenames.map((f) => path.relative(process.cwd(), f)).join(' ')}`,
+  rustfmt: (filenames: string[]) => `rustfmt ${filenames.map((f) => path.relative(process.cwd(), f)).join(' ')}`,
 }
 
 const lintStage: Configuration = async (allStagedFiles) => {

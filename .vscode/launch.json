@@ -1,29 +1,29 @@
 {
-  "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run Extension",
-      "type": "extensionHost",
-      "request": "launch",
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}",
         "--disable-extensions",
-        "${workspaceFolder}/test-workspace"
+        "${workspaceFolder}/test-workspace/workspaces.code-workspace"
       ],
-      "outFiles": ["${workspaceFolder}/projects/client/out/**/*.js"]
+      "name": "Run Extension",
+      "outFiles": ["${workspaceFolder}/projects/client/out/**/*.js"],
+      "request": "launch",
+      "type": "extensionHost"
     },
     {
-      "name": "Debug Extension",
-      "type": "extensionHost",
-      "request": "launch",
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}",
         "--extensionDevelopmentKind=workspace",
         "--disable-extensions",
-        "${workspaceFolder}/test-workspace"
+        "${workspaceFolder}/test-workspace/workspaces.code-workspace"
       ],
+      "name": "Debug Extension",
       "outFiles": ["${workspaceFolder}/projects/client/out/**/*.js"],
-      "sourceMaps": true
+      "request": "launch",
+      "sourceMaps": true,
+      "type": "extensionHost"
     }
-  ]
+  ],
+  "version": "0.2.0"
 }

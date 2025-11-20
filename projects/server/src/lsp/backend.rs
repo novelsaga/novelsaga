@@ -1,12 +1,20 @@
-use std::collections::HashMap;
-use std::sync::Arc;
-use tokio::sync::RwLock;
-use tower_lsp::jsonrpc::Result;
-use tower_lsp::lsp_types::*;
-use tower_lsp::{Client, LanguageServer};
+use std::{collections::HashMap, sync::Arc};
 
-use crate::config::GLOBAL_CONFIG_LOADER;
-use crate::core::formatter;
+use tokio::sync::RwLock;
+use tower_lsp::{
+  Client, LanguageServer,
+  jsonrpc::Result,
+  lsp_types::{
+    DidChangeTextDocumentParams, DidCloseTextDocumentParams, DidOpenTextDocumentParams, DocumentFormattingParams,
+    InitializeParams, InitializeResult, InitializedParams, MessageType, OneOf, Position, Range, ServerCapabilities,
+    ServerInfo, TextDocumentSyncCapability, TextDocumentSyncKind, TextEdit, Url,
+  },
+};
+
+use crate::{
+  config::{GLOBAL_CONFIG_LOADER, NovelSagaConfig},
+  core::formatter,
+};
 
 #[derive(Debug)]
 pub struct Backend {
@@ -30,7 +38,7 @@ impl LanguageServer for Backend {
 
     // Log workspace information
     if let Some(root_uri) = params.root_uri {
-      eprintln!("Workspace root: {}", root_uri);
+      eprintln!("Workspace root: {root_uri}");
     }
 
     Ok(InitializeResult {
@@ -97,11 +105,8 @@ impl LanguageServer for Backend {
   async fn formatting(&self, params: DocumentFormattingParams) -> Result<Option<Vec<TextEdit>>> {
     eprintln!("Formatting requested for {:?}", params.text_document.uri);
 
-    // 使用全局配置加载器查找配置文件（需要写锁以支持缓存）
-    let config = {
-      let mut loader = GLOBAL_CONFIG_LOADER.write().unwrap();
-      loader.find_config_file_nearest(params.text_document.uri.path())
-    };
+    // 使用全局配置加载器获取配置
+    let config = GLOBAL_CONFIG_LOADER.read().unwrap().get_config().cloned();
     dbg!("Loaded config for formatting:", &config);
 
     // 获取文档内容
@@ -111,25 +116,21 @@ impl LanguageServer for Backend {
     };
 
     // 使用 pangu 格式化文本（在中英文之间添加空格）
-    let formatted = formatter(config.as_ref().unwrap_or(&Default::default()), content);
-
-    // 如果内容没有变化，返回 None
-    if formatted == *content {
-      return Ok(None);
-    }
+    let formatted = formatter(
+      config.as_ref().unwrap_or(&NovelSagaConfig::default()),
+      content,
+      params.text_document.uri.path(),
+    );
 
     // 计算文档的结束位置
-    let line_count = content.lines().count() as u32;
+    let line_count = u32::try_from(content.lines().count()).unwrap_or(0);
     let last_line = content.lines().last().unwrap_or("");
-    let last_char = last_line.chars().count() as u32;
+    let last_char = u32::try_from(last_line.chars().count()).unwrap_or(0);
 
     // 返回替换整个文档的 TextEdit
     Ok(Some(vec![TextEdit {
       range: Range {
-        start: Position {
-          line: 0,
-          character: 0,
-        },
+        start: Position { line: 0, character: 0 },
         end: Position {
           line: line_count.saturating_sub(1),
           character: last_char,

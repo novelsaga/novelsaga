@@ -1,8 +1,0 @@
-{
-  "[markdown]": {
-    "editor.defaultFormatter": "novelsaga.novelsaga"
-  },
-  "[plaintext]": {
-    "editor.defaultFormatter": "novelsaga.novelsaga"
-  }
-}

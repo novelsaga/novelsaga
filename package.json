@@ -82,6 +82,8 @@
     "yaml": "^2.8.1"
   },
   "activationEvents": [
+    "onLanguage:plaintext",
+    "onLanguage:markdown",
     "workspaceContains:novelsaga.config.toml",
     "workspaceContains:novelsaga.config.yaml",
     "workspaceContains:novelsaga.config.json",

@@ -1,0 +1,18 @@
+{
+  "folders": [
+    {
+      "path": "workspace1",
+    },
+    {
+      "path": "workspace2",
+    },
+  ],
+  "settings": {
+    "[markdown]": {
+      "editor.defaultFormatter": "novelsaga.novelsaga",
+    },
+    "[plaintext]": {
+      "editor.defaultFormatter": "novelsaga.novelsaga",
+    },
+  },
+}

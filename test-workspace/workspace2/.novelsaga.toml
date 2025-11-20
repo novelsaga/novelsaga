@@ -1,0 +1,4 @@
+[fmt]
+indent_spaces = 2
+blank_lines_between_paragraphs = 2
+markdown_only_use_pangu = false

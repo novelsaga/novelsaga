@@ -3,6 +3,9 @@ import * as path from 'node:path'
 import * as vscode from 'vscode'
 import { Executable, LanguageClient, LanguageClientOptions } from 'vscode-languageclient/node'
 
+// @ts-expect-error - import attributes in CommonJS
+import { isDEV } from './macros' with { type: 'macro' }
+
 interface ServerInstance {
   client: LanguageClient
   folder: vscode.WorkspaceFolder
@@ -53,7 +56,7 @@ async function startServerForFolder(context: vscode.ExtensionContext, folder: vs
     const serverBinaryPath = path.join(
       context.extensionPath,
       'target',
-      process.env.NODE_ENV === 'development' ? 'debug' : 'release',
+      isDEV() ? 'debug' : 'release',
       'novelsaga_server',
     )
 

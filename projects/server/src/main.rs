@@ -1,16 +1,15 @@
-use clap::Parser;
-
 mod args;
 mod config;
 mod core;
 mod lsp;
 
-use args::Cli;
+use args::GLOBAL_CLI;
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
-  let cli = Cli::parse();
-  cli.validate();
+  // 访问全局 CLI，触发解析和配置加载
+  let cli = &*GLOBAL_CLI;
+
   if cli.lsp {
     lsp::start().await;
   }

@@ -9,6 +9,8 @@
   devenvRootPathBin = "${devenv-root-path}/.devenv/profile/bin";
 in {
   "rust-analyzer.server.path" = "${devenvRootPathBin}/rust-analyzer";
+  "rust-analyzer.check.command" = "clippy";
+  "rust-analyzer.check.extraArgs" = ["--all-features"];
   "prettier.enable" = true;
   "nix.enableLanguageServer" = true;
   "nix.serverPath" = lib.getExe pkgs.nil;

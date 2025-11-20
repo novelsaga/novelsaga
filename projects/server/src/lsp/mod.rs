@@ -1,7 +1,6 @@
 mod backend;
 
 pub use backend::Backend;
-
 use tower_lsp::LspService;
 
 /// 启动 LSP 服务器
@@ -18,9 +17,7 @@ pub async fn start() {
   eprintln!("Starting LSP server...");
 
   // Run the server
-  tower_lsp::Server::new(stdin, stdout, socket)
-    .serve(service)
-    .await;
+  tower_lsp::Server::new(stdin, stdout, socket).serve(service).await;
 
   eprintln!("LSP server finished");
 }

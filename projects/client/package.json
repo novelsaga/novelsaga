@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "description": "NovelSaga LSP Client",
-  "main": "./out/extension.js",
+  "main": "./out/extension.cjs",
   "scripts": {
     "compile:debug": "cross-env NODE_ENV=development node build.mts",
     "compile:release": "node build.mts",

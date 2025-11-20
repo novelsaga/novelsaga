@@ -2,6 +2,10 @@
 resolver = "3"
 members = ["projects/server"]
 
+[workspace.lints.clippy]
+all = "warn"
+pedantic = "warn"
+
 [profile.release]
 opt-level = "z"     # Optimize for size
 lto = true          # Enable Link Time Optimization
