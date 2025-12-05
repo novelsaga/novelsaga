@@ -1,13 +1,16 @@
 import * as esbuild from 'esbuild'
 import macros from 'unplugin-parcel-macros'
+import { getRoot } from 'utils-dev'
 
 const isWatch = process.argv.includes('--watch')
+
+const root = getRoot()
 
 const ctx = await esbuild.context({
   plugins: [macros.esbuild()],
   entryPoints: ['./src/extension.ts'],
   bundle: true,
-  outfile: './out/extension.cjs',
+  outfile: `${root}/out/extension.cjs`,
   external: ['vscode'],
   format: 'cjs',
   platform: 'node',

@@ -1,13 +1,13 @@
 [workspace]
-resolver = "3"
-members = ["projects/server"]
+  members  = ["projects/novelsaga-cli"]
+  resolver = "3"
 
-[workspace.lints.clippy]
-all = "warn"
-pedantic = "warn"
+  [workspace.lints.clippy]
+    all      = "warn"
+    pedantic = "warn"
 
 [profile.release]
-opt-level = "z"     # Optimize for size
-lto = true          # Enable Link Time Optimization
-codegen-units = 1   # Reduce parallel code generation units to improve optimization
-strip = true        # Strip symbols from binary
+  codegen-units = 1    # Reduce parallel code generation units to improve optimization
+  lto           = true # Enable Link Time Optimization
+  opt-level     = "z"  # Optimize for size
+  strip         = true # Strip symbols from binary

@@ -2,6 +2,7 @@ import type { PrettierConfig as PrettierPluginSortImportsConfig } from '@ianvs/p
 import type { Config, Options } from 'prettier'
 import type { Options as PrettierPluginJsdocOptions } from 'prettier-plugin-jsdoc'
 import type { SortJsonOptions } from 'prettier-plugin-sort-json'
+import type { PrettierTaploOptions as PrettierPluginTomlOptions } from 'prettier-plugin-toml'
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -94,6 +95,22 @@ const config: Config = {
       files: ['package.json'],
       options: {
         plugins: ['prettier-plugin-pkg'],
+      },
+    },
+    {
+      files: ['*.toml'],
+      options: {
+        plugins: ['prettier-plugin-toml'],
+        ...({
+          reorderKeys: true,
+          indentEntries: true,
+          indentTables: true,
+          alignComments: true,
+          alignEntries: true,
+          allowedBlankLines: 1,
+          arrayAutoCollapse: true,
+          arrayAutoExpand: true,
+        } satisfies PrettierPluginTomlOptions),
       },
     },
   ],

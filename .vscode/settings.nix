@@ -45,4 +45,5 @@ in {
   "[typescriptreact]" = {
     "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
   };
+  "dependi.rust.lockFileEnabled" = true;
 }

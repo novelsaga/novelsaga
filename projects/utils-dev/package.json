@@ -1,0 +1,10 @@
+{
+  "name": "utils-dev",
+  "type": "module",
+  "types": "./out/index.d.ts",
+  "module": "./out/index.js",
+  "main": "./out/index.js",
+  "scripts": {
+    "compile": "tsc"
+  }
+}

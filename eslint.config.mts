@@ -41,7 +41,7 @@ const tseslintConfig = defineConfig(
     },
   },
   {
-    ignores: ['**/node_modules/**/*', '**/dist/**/*', '**/build/**/*'],
+    ignores: ['**/node_modules/**/*', '**/dist/**/*', '**/build/**/*', '**/out/**/*'],
     languageOptions: {
       parserOptions: {
         projectService: {

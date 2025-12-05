@@ -4,7 +4,7 @@ import * as vscode from 'vscode'
 import { Executable, LanguageClient, LanguageClientOptions } from 'vscode-languageclient/node'
 
 // @ts-expect-error - import attributes in CommonJS
-import { isDEV } from './macros' with { type: 'macro' }
+import { getCliMainCargoToml, isDEV } from './macros' with { type: 'macro' }
 
 interface ServerInstance {
   client: LanguageClient
@@ -57,13 +57,13 @@ async function startServerForFolder(context: vscode.ExtensionContext, folder: vs
       context.extensionPath,
       'target',
       isDEV() ? 'debug' : 'release',
-      'novelsaga_server',
+      getCliMainCargoToml().bin[0].name,
     )
 
     // Run the native server directly
     const run: Executable = {
       command: serverBinaryPath,
-      args: ['--lsp'],
+      args: ['--lsp', '-p', `${folder.uri.fsPath}/`],
       options: {
         cwd: folder.uri.fsPath,
         env: {

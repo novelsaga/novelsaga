@@ -62,6 +62,18 @@
           env = {
             COREPACK_INTEGRITY_KEYS = "0";
             NODE_OPTIONS = "--experimental-strip-types";
+            CC_x86_64_unknown_linux_gnu = "gcc";
+            CXX_x86_64_unknown_linux_gnu = "g++";
+            AR_x86_64_unknown_linux_gnu = "ar";
+            CC_aarch64_unknown_linux_gnu = "aarch64-unknown-linux-gnu-gcc";
+            CXX_aarch64_unknown_linux_gnu = "aarch64-unknown-linux-gnu-g++";
+            AR_aarch64_unknown_linux_gnu = "aarch64-unknown-linux-gnu-ar";
+            CC_x86_64_pc_windows_gnu = "x86_64-w64-mingw32-gcc";
+            CXX_x86_64_pc_windows_gnu = "x86_64-w64-mingw32-g++";
+            AR_x86_64_pc_windows_gnu = "x86_64-w64-mingw32-ar";
+            CC_aarch64_pc_windows_gnullvm = "aarch64-w64-mingw32-clang";
+            CXX_aarch64_pc_windows_gnullvm = "aarch64-w64-mingw32-clang++";
+            AR_aarch64_pc_windows_gnullvm = "aarch64-w64-mingw32-ar";
           };
           files = {
             ".vscode/settings.json".json = import ./.vscode/settings.nix {

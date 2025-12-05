@@ -2,6 +2,8 @@ mod args;
 mod config;
 mod core;
 mod lsp;
+mod plugins;
+mod home_path;
 
 use args::GLOBAL_CLI;
 

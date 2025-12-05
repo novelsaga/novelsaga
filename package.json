@@ -1,6 +1,6 @@
 {
   "name": "novelsaga",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "displayName": "NovelSaga Language Server",
   "description": "Language Server for NovelSaga with WASI support",
   "categories": [
@@ -14,7 +14,7 @@
     "pnpm": ">=10.0.0",
     "vscode": "^1.106.0"
   },
-  "main": "./projects/client/out/extension.cjs",
+  "main": "./out/extension.cjs",
   "scripts": {
     "build:server": "cargo build",
     "compile": "pnpm --filter client compile:debug && pnpm run build:server",
@@ -24,6 +24,7 @@
     "watch": "pnpm --filter client watch"
   },
   "dependencies": {
+    "confbox": "^0.2.2",
     "micromatch": "^4.0.8",
     "ramda": "^0.32.0",
     "ramda-adjunct": "^5.1.0"
@@ -75,10 +76,12 @@
     "prettier-plugin-jsdoc": "^1.5.0",
     "prettier-plugin-pkg": "^0.21.2",
     "prettier-plugin-sort-json": "^4.1.1",
+    "prettier-plugin-toml": "^2.0.6",
     "shebang-command": "^2.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.47.0",
     "unplugin-parcel-macros": "^0.1.1",
+    "utils-dev": "workspace:*",
     "yaml": "^2.8.1"
   },
   "activationEvents": [
